@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.spark.mllib.clustering.KMeansModel;
 import org.apache.spark.mllib.linalg.Vectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,9 @@ import com.yands.ml.server.ScalaKMeans;
 @RequestMapping("kmeans")
 public class KMeansControl {
 
+    @Autowired
+    private ScalaKMeans scalaKMeans;
+
 	private Map<String, KMeansModel> map;
 	
 	@PostMapping("train")
@@ -28,7 +32,7 @@ public class KMeansControl {
 		String path = json.getString("path");
 		int k = json.getIntValue("k");
 		int itera = json.getIntValue("itera");
-		KMeansModel model = new ScalaKMeans().train(name, mode, path, k, itera);
+		KMeansModel model = scalaKMeans.train(name, mode, path, k, itera);
 		if (map == null) {
 			map = new HashMap<String, KMeansModel>();
 		}

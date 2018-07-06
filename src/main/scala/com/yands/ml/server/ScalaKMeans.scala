@@ -5,12 +5,19 @@ import org.apache.spark.SparkContext
 import org.apache.spark.mllib.clustering.KMeans
 import org.apache.spark.mllib.clustering.KMeansModel
 import org.apache.spark.mllib.linalg.Vectors
+import org.springframework.stereotype.Service;
 
+@Service
 class ScalaKMeans {
+  
+  var sc: SparkContext = null
   
   def train(name: String, mode: String, path: String, k: Int, itera: Int): KMeansModel = {
     val conf = new SparkConf().setMaster(mode).setAppName(name)
-    val sc = new SparkContext(conf)
+    if (sc != null) {
+      sc.stop
+    }
+    sc = new SparkContext(conf)
     val data = sc.textFile(path)
     val map = data.map(_.split(" ")).map { x => 
       val values = new Array[Double](3)
