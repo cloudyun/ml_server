@@ -51,6 +51,9 @@ public class JavaALSM1MControl {
     	String name = json.getString("name");
     	int userId = json.getIntValue("userId");
 		int productId = json.getIntValue("productId");
+    	if (map == null) {
+			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
+    	}
 		MatrixFactorizationModel model = map.get(name);
 		if (model == null) {
 			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
@@ -64,6 +67,9 @@ public class JavaALSM1MControl {
     	String name = json.getString("name");
     	int userId = json.getIntValue("userId");
 		int topn = json.getIntValue("topn");
+    	if (map == null) {
+			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
+    	}
 		MatrixFactorizationModel model = map.get(name);
 		if (model == null) {
 			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
@@ -77,6 +83,9 @@ public class JavaALSM1MControl {
     	String name = json.getString("name");
     	int productId = json.getIntValue("productId");
 		int topn = json.getIntValue("topn");
+    	if (map == null) {
+			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
+    	}
 		MatrixFactorizationModel model = map.get(name);
 		if (model == null) {
 			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
@@ -89,6 +98,9 @@ public class JavaALSM1MControl {
     public ResponseData verification(@RequestBody JSONObject json) {
     	String name = json.getString("name");
     	String path = json.getString("path");
+    	if (map == null) {
+			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
+    	}
 		MatrixFactorizationModel model = map.get(name);
 		if (model == null) {
 			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");

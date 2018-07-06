@@ -27,14 +27,12 @@ public class JavaKMeans {
 		SparkConf conf = new SparkConf();
 		conf.setAppName(name);
 		conf.setMaster(mode);
+		Constant.close();
 		
-		if (Constant.jsc != null) {
-			Constant.jsc.stop();
-			Constant.jsc.close();
-			Constant.jsc = null;
+		if (Constant.jsc == null) {
+			Constant.jsc = new JavaSparkContext(conf);
 		}
 
-		Constant.jsc = new JavaSparkContext(conf);
 		JavaRDD<String> data = Constant.jsc.textFile(path);
 		JavaRDD<Vector> ratings = data.map(value -> {
 			String[] split = value.split(" ");

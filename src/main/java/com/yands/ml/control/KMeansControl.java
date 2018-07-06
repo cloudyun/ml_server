@@ -57,6 +57,9 @@ public class KMeansControl {
     	for (int x = 0; x < arr.size(); x++) {
     		vector[x] = arr.getDouble(x);
     	}
+    	if (map == null) {
+			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");
+    	}
     	KMeansModel model = map.get(name);
 		if (model == null) {
 			return ResponseData.buildErrorMessageResponse(303, "请先训练[" + name +"]的数据");

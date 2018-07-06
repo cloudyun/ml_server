@@ -35,12 +35,11 @@ public class JavaALSM1M {
 		conf.setAppName(name);
 		conf.setMaster(mode);
 		
-		if (Constant.jsc != null) {
-			Constant.jsc.close();
-			Constant.jsc = null;
+		Constant.close();
+		
+		if (Constant.jsc == null) {
+			Constant.jsc = new JavaSparkContext(conf);
 		}
-
-		Constant.jsc = new JavaSparkContext(conf);
 
 		JavaRDD<String> data = Constant.jsc.textFile(path);
 		JavaRDD<Rating> ratings = data.map(s -> {
@@ -74,6 +73,9 @@ public class JavaALSM1M {
 	}
 	
 	public List<Map<String, Object>> verification(MatrixFactorizationModel model, String path) {
+		if (Constant.jsc == null) {
+			Constant.jsc = new JavaSparkContext(new SparkConf());
+		}
 		JavaRDD<String> data = Constant.jsc.textFile(path);
 		JavaRDD<Tuple2<Integer, Integer>> ratings = data.map(s -> {
 			String[] sarray = s.split("\t");
@@ -90,6 +92,7 @@ public class JavaALSM1M {
 			rat.put("rating", s.rating());
 			list.add(rat);
 		}
+		Constant.close();
 		return list;
 	}
 	

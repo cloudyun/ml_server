@@ -14,5 +14,15 @@ import org.apache.spark.api.java.JavaSparkContext;
 public class Constant {
 	
 	public static JavaSparkContext jsc = null;
+	
+	public static void close() {
+		try {
+			if (jsc != null) {
+				jsc.stop();
+				jsc.close();
+				jsc = null;
+			}
+		} catch (Exception e) {}
+	}
 
 }
