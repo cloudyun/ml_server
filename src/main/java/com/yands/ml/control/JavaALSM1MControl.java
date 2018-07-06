@@ -13,6 +13,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.yands.ml.entity.ResponseData;
 import com.yands.ml.server.JavaALSM1M;
 
+/**  
+ * @Title:  JavaALSM1MControl.java   
+ * @Package com.yands.ml.control   
+ * @Description:    (als控制类)   
+ * @author: gaoyun     
+ * @edit by: 
+ * @date:   2018年7月6日 下午6:02:01   
+ * @version V1.0 
+ */ 
 @RestController
 @RequestMapping("als")
 public class JavaALSM1MControl {

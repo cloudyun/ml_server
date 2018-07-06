@@ -7,6 +7,15 @@ import org.apache.spark.mllib.clustering.KMeansModel
 import org.apache.spark.mllib.linalg.Vectors
 import org.springframework.stereotype.Service;
 
+/**  
+ * @Title:  ScalaKMeans.scala   
+ * @Package com.yands.ml.server   
+ * @Description:    (scala版kmeans)   
+ * @author: gaoyun     
+ * @edit by: 
+ * @date:   2018年7月6日 下午6:03:35   
+ * @version V1.0 
+ */
 @Service
 class ScalaKMeans {
   

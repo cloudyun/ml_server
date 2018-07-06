@@ -1,9 +1,14 @@
 package com.yands.ml.entity;
 
-/**
- * gb 返回的统一类型
- */
-
+/**  
+ * @Title:  ResponseData.java   
+ * @Package com.yands.ml.entity   
+ * @Description:    (返回的统一类型)   
+ * @author: gaoyun     
+ * @edit by: 
+ * @date:   2018年7月6日 下午6:02:38   
+ * @version V1.0 
+ */ 
 public class ResponseData {
 
 	private int code = 200;

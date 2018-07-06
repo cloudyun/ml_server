@@ -14,14 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yands.ml.entity.ResponseData;
-import com.yands.ml.server.ScalaKMeans;
+import com.yands.ml.server.JavaKMeans;
 
+/**  
+ * @Title:  KMeansControl.java   
+ * @Package com.yands.ml.control   
+ * @Description:    (kmeans控制类)   
+ * @author: gaoyun     
+ * @edit by: 
+ * @date:   2018年7月6日 下午6:01:34   
+ * @version V1.0 
+ */ 
 @RestController
 @RequestMapping("kmeans")
 public class KMeansControl {
 
     @Autowired
-    private ScalaKMeans scalaKMeans;
+    private JavaKMeans javaKMeans;
 
 	private Map<String, KMeansModel> map;
 	
@@ -32,7 +41,7 @@ public class KMeansControl {
 		String path = json.getString("path");
 		int k = json.getIntValue("k");
 		int itera = json.getIntValue("itera");
-		KMeansModel model = scalaKMeans.train(name, mode, path, k, itera);
+		KMeansModel model = javaKMeans.train(name, mode, path, k, itera);
 		if (map == null) {
 			map = new HashMap<String, KMeansModel>();
 		}

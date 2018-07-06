@@ -9,6 +9,15 @@ import org.apache.spark.mllib.linalg.distributed.RowMatrix
 import org.apache.spark.mllib.recommendation.{ALS, Rating}
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**  
+ * @Title:  Clustering.scala   
+ * @Package com.yands.ml.server   
+ * @Description:    (机器学习)   
+ * @author: gaoyun     
+ * @edit by: 
+ * @date:   2018年7月6日 下午6:03:12   
+ * @version V1.0 
+ */ 
 object Clustering {
   def main(args: Array[String]): Unit = {
     Logger.getLogger("org.apache.spark").setLevel(Level.WARN)

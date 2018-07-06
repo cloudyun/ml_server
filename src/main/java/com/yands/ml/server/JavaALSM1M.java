@@ -14,26 +14,35 @@ import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
 import org.apache.spark.mllib.recommendation.Rating;
 import org.springframework.stereotype.Service;
 
+import com.yands.ml.constant.Constant;
+
 import scala.Tuple2;
 
+/**  
+ * @Title:  JavaALSM1M.java   
+ * @Package com.yands.ml.server   
+ * @Description:    (java版ALS算法实现)   
+ * @author: gaoyun     
+ * @edit by: 
+ * @date:   2018年7月6日 下午6:00:44   
+ * @version V1.0 
+ */ 
 @Service
 public class JavaALSM1M {
-	
-	private JavaSparkContext jsc;
 	
 	public MatrixFactorizationModel train(String name, String mode, int rank, int itera, String path) {
 		SparkConf conf = new SparkConf();
 		conf.setAppName(name);
 		conf.setMaster(mode);
 		
-		if (jsc != null) {
-			jsc.close();
-			jsc = null;
+		if (Constant.jsc != null) {
+			Constant.jsc.close();
+			Constant.jsc = null;
 		}
 
-		jsc = new JavaSparkContext(conf);
+		Constant.jsc = new JavaSparkContext(conf);
 
-		JavaRDD<String> data = jsc.textFile(path);
+		JavaRDD<String> data = Constant.jsc.textFile(path);
 		JavaRDD<Rating> ratings = data.map(s -> {
 			String[] sarray = s.split("\t");
 			return new Rating(Integer.parseInt(sarray[0]), Integer.parseInt(sarray[1]), Double.parseDouble(sarray[2]));
@@ -65,7 +74,7 @@ public class JavaALSM1M {
 	}
 	
 	public List<Map<String, Object>> verification(MatrixFactorizationModel model, String path) {
-		JavaRDD<String> data = jsc.textFile(path);
+		JavaRDD<String> data = Constant.jsc.textFile(path);
 		JavaRDD<Tuple2<Integer, Integer>> ratings = data.map(s -> {
 			String[] sarray = s.split("\t");
 			return new Tuple2<Integer, Integer>(Integer.parseInt(sarray[0]), Integer.parseInt(sarray[1]));
